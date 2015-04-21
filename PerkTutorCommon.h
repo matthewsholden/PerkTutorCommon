@@ -24,16 +24,21 @@
 // STD includes
 #include <cstdlib>
 #include <string>
+#include <sstream>
 
 // VTK includes
-#include "vtkVector.h"
+#include "vtkMatrix4x4.h"
 #include "vtkSmartPointer.h"
 
 // Slicer includes
 #include "vtkMRMLAbstractLogic.h"
 
+// PerkTutor Common includes
+#include "PerkTutorCommonExport.h"
+
+
 /// \ingroup PerkTutor_PerkTutorCommon
-class Q_SLICER_QTMODULES_PERKTUTORCOMMON_EXPORT PerkTutorCommon
+class PERKTUTORCOMMON_EXPORT PerkTutorCommon
 {
 public:
   //----------------------------------------------------------------------------
@@ -44,6 +49,18 @@ public:
   //----------------------------------------------------------------------------
   // Utility functions
   //----------------------------------------------------------------------------
+
+  // Convert between vtkMatrix4x4 <--> Double Array <--> String
+  static std::string MatrixDoubleToString( double* matrixDouble );
+  static void MatrixStringToDouble( std::string matrixString, double* matrixDouble );
+
+  static void Matrix4x4ToDouble( vtkMatrix4x4* matrix4x4, double* matrixDouble );
+  static void MatrixDoubleTo4x4( double* matrixDouble, vtkMatrix4x4* matrix4x4 );
+
+  static std::string Matrix4x4ToString( vtkMatrix4x4* matrix4x4 );
+  static void MatrixStringTo4x4( std::string matrixString, vtkMatrix4x4* matrix4x4 );
+
+  // Grab module logic
   static vtkMRMLAbstractLogic* GetSlicerModuleLogic( std::string moduleName );
   
 };
